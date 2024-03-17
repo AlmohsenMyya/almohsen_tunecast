@@ -1,0 +1,8 @@
+import 'package:almohsen_s_application13/widgets/app_bar/custom_app_bar.dart';import 'package:almohsen_s_application13/widgets/app_bar/appbar_leading_image.dart';import 'package:almohsen_s_application13/widgets/app_bar/appbar_title.dart';import 'widgets/playback_item_widget.dart';import 'models/playback_item_model.dart';import 'package:flutter/material.dart';import 'package:almohsen_s_application13/core/app_export.dart';import 'controller/playback_controller.dart';class PlaybackScreen extends GetWidget<PlaybackController> {const PlaybackScreen({Key? key}) : super(key: key);
+
+@override Widget build(BuildContext context) { return SafeArea(child: Scaffold(appBar: _buildAppBar(), body: SizedBox(width: SizeUtils.width, child: SingleChildScrollView(padding: EdgeInsets.only(top: 29.v), child: _buildPlayback())))); } 
+/// Section Widget
+PreferredSizeWidget _buildAppBar() { return CustomAppBar(height: 52.v, leadingWidth: 52.h, leading: AppbarLeadingImage(imagePath: ImageConstant.imgArrowDown, margin: EdgeInsets.only(left: 24.h, top: 11.v, bottom: 13.v)), title: AppbarTitle(text: "lbl_playback".tr, margin: EdgeInsets.only(left: 16.h))); } 
+/// Section Widget
+Widget _buildPlayback() { return Padding(padding: EdgeInsets.symmetric(horizontal: 24.h), child: Obx(() => ListView.separated(physics: NeverScrollableScrollPhysics(), shrinkWrap: true, separatorBuilder: (context, index) {return SizedBox(height: 25.v);}, itemCount: controller.playbackModelObj.value.playbackItemList.value.length, itemBuilder: (context, index) {PlaybackItemModel model = controller.playbackModelObj.value.playbackItemList.value[index]; return PlaybackItemWidget(model);}))); } 
+ }

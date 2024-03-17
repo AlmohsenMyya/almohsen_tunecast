@@ -1,0 +1,5 @@
+import '../../../core/app_export.dart';import 'trendingnow_item_model.dart';/// This class defines the variables used in the [trending_now_screen],
+/// and is typically used to hold data that is passed between different parts of the application.
+class TrendingNowModel {Rx<List<TrendingnowItemModel>> trendingnowItemList = Rx([TrendingnowItemModel(image:ImageConstant.imgImage188x184.obs,loremIpsumDolor: "Shades of Love - Ania Szarmach".obs),TrendingnowItemModel(image:ImageConstant.imgImage16.obs,loremIpsumDolor: "Without You - The Kid LAROI".obs),TrendingnowItemModel(image:ImageConstant.imgImage17.obs,loremIpsumDolor: "Save Your Tears\nThe Weeknd & Aria...".obs),TrendingnowItemModel(image:ImageConstant.imgImage18.obs,loremIpsumDolor: "Kiss Me More - \nDoja Cat Featuring ...".obs),TrendingnowItemModel(image:ImageConstant.imgImage19.obs,loremIpsumDolor: "Drivers License - Olivia Rodrigo".obs),TrendingnowItemModel(image:ImageConstant.imgImage20.obs,loremIpsumDolor: "Forever After All - Luke Combs".obs)]);
+
+ }

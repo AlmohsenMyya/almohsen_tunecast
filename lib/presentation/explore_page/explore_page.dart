@@ -1,0 +1,14 @@
+import 'package:almohsen_s_application13/widgets/app_bar/custom_app_bar.dart';import 'package:almohsen_s_application13/widgets/app_bar/appbar_leading_image.dart';import 'package:almohsen_s_application13/widgets/app_bar/appbar_title.dart';import 'package:almohsen_s_application13/widgets/app_bar/appbar_trailing_iconbutton.dart';import 'package:almohsen_s_application13/widgets/custom_search_view.dart';import 'widgets/explore_item_widget.dart';import 'models/explore_item_model.dart';import 'package:flutter/material.dart';import 'package:almohsen_s_application13/core/app_export.dart';import 'controller/explore_controller.dart';import 'models/explore_model.dart';
+// ignore_for_file: must_be_immutable
+class ExplorePage extends StatelessWidget {ExplorePage({Key? key}) : super(key: key);
+
+ExploreController controller = Get.put(ExploreController(ExploreModel().obs));
+
+@override Widget build(BuildContext context) { return SafeArea(child: Scaffold(resizeToAvoidBottomInset: false, body: Container(width: double.maxFinite, decoration: AppDecoration.fillWhiteA, child: Column(children: [_buildHeaderContent(), Container(padding: EdgeInsets.symmetric(horizontal: 24.h, vertical: 17.v), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text("lbl_browse_all".tr, style: theme.textTheme.titleLarge), SizedBox(height: 24.v), _buildExplore()]))])))); } 
+/// Section Widget
+Widget _buildHeaderContent() { return Container(padding: EdgeInsets.symmetric(vertical: 5.v), decoration: AppDecoration.fillWhiteA, child: Column(children: [SizedBox(height: 9.v), CustomAppBar(height: 33.v, leadingWidth: 56.h, leading: AppbarLeadingImage(imagePath: ImageConstant.imgVector, margin: EdgeInsets.only(left: 24.h, bottom: 1.v)), title: AppbarTitle(text: "lbl_explore".tr, margin: EdgeInsets.only(left: 16.h)), actions: [AppbarTrailingIconbutton(imagePath: ImageConstant.imgSettingsGray90001, margin: EdgeInsets.fromLTRB(24.h, 2.v, 24.h, 3.v))]), SizedBox(height: 38.v), Padding(padding: EdgeInsets.symmetric(horizontal: 24.h), child: CustomSearchView(controller: controller.searchController, hintText: "msg_artists_songs".tr, contentPadding: EdgeInsets.only(top: 19.v, right: 30.h, bottom: 19.v)))])); } 
+/// Section Widget
+Widget _buildExplore() { return Obx(() => GridView.builder(shrinkWrap: true, gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(mainAxisExtent: 121.v, crossAxisCount: 2, mainAxisSpacing: 12.h, crossAxisSpacing: 12.h), physics: NeverScrollableScrollPhysics(), itemCount: controller.exploreModelObj.value.exploreItemList.value.length, itemBuilder: (context, index) {ExploreItemModel model = controller.exploreModelObj.value.exploreItemList.value[index]; return ExploreItemWidget(model, onTapExploreCard: () {onTapExploreCard();});})); } 
+/// Navigates to the podcastsScreen when the action is triggered.
+onTapExploreCard() { Get.toNamed(AppRoutes.podcastsScreen, ); } 
+ }

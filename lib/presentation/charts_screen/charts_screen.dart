@@ -1,0 +1,15 @@
+import 'package:almohsen_s_application13/widgets/app_bar/custom_app_bar.dart';import 'package:almohsen_s_application13/widgets/app_bar/appbar_leading_image.dart';import 'package:almohsen_s_application13/widgets/app_bar/appbar_title.dart';import 'package:almohsen_s_application13/widgets/app_bar/appbar_trailing_image.dart';import 'widgets/topalbumsglobal_item_widget.dart';import 'models/topalbumsglobal_item_model.dart';import 'widgets/charts_item_widget.dart';import 'models/charts_item_model.dart';import 'package:flutter/material.dart';import 'package:almohsen_s_application13/core/app_export.dart';import 'controller/charts_controller.dart';class ChartsScreen extends GetWidget<ChartsController> {const ChartsScreen({Key? key}) : super(key: key);
+
+@override Widget build(BuildContext context) { return SafeArea(child: Scaffold(appBar: _buildAppBar(), body: SizedBox(width: SizeUtils.width, child: SingleChildScrollView(padding: EdgeInsets.only(top: 27.v), child: Container(margin: EdgeInsets.only(bottom: 5.v), padding: EdgeInsets.symmetric(horizontal: 24.h), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text("msg_weekly_album_charts".tr, style: theme.textTheme.headlineSmall), SizedBox(height: 13.v), _buildTopAlbumsGlobal(), SizedBox(height: 30.v), Text("msg_weekly_song_charts".tr, style: theme.textTheme.headlineSmall), SizedBox(height: 13.v), _buildCharts()])))))); } 
+/// Section Widget
+PreferredSizeWidget _buildAppBar() { return CustomAppBar(height: 48.v, leadingWidth: 52.h, leading: AppbarLeadingImage(imagePath: ImageConstant.imgArrowDown, margin: EdgeInsets.only(left: 24.h, top: 11.v, bottom: 9.v), onTap: () {onTapArrowDown();}), title: AppbarTitle(text: "lbl_charts".tr, margin: EdgeInsets.only(left: 16.h)), actions: [AppbarTrailingImage(imagePath: ImageConstant.imgRewind, margin: EdgeInsets.fromLTRB(24.h, 11.v, 24.h, 9.v))]); } 
+/// Section Widget
+Widget _buildTopAlbumsGlobal() { return SizedBox(height: 222.v, child: Obx(() => ListView.separated(scrollDirection: Axis.horizontal, separatorBuilder: (context, index) {return SizedBox(width: 12.h);}, itemCount: controller.chartsModelObj.value.topalbumsglobalItemList.value.length, itemBuilder: (context, index) {TopalbumsglobalItemModel model = controller.chartsModelObj.value.topalbumsglobalItemList.value[index]; return TopalbumsglobalItemWidget(model, onTapCard: () {onTapCard();});}))); } 
+/// Section Widget
+Widget _buildCharts() { return SizedBox(height: 222.v, child: Obx(() => ListView.separated(scrollDirection: Axis.horizontal, separatorBuilder: (context, index) {return SizedBox(width: 12.h);}, itemCount: controller.chartsModelObj.value.chartsItemList.value.length, itemBuilder: (context, index) {ChartsItemModel model = controller.chartsModelObj.value.chartsItemList.value[index]; return ChartsItemWidget(model);}))); } 
+
+/// Navigates to the previous screen.
+onTapArrowDown() { Get.back(); } 
+/// Navigates to the topAlbumsGlobalScreen when the action is triggered.
+onTapCard() { Get.toNamed(AppRoutes.topAlbumsGlobalScreen, ); } 
+ }
